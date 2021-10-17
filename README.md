@@ -1,2 +1,2 @@
 # acquire
-A digital version of this board game https://boardgamegeek.com/boardgame/5/acquire
+A digital version of the board game acquire https://boardgamegeek.com/boardgame/5/acquire
