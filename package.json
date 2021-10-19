@@ -1,0 +1,25 @@
+{
+  "name": "acquire",
+  "version": "1.0.0",
+  "description": "A digital version of the board game acquire https://boardgamegeek.com/boardgame/5/acquire",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/merryt/acquire.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/merryt/acquire/issues"
+  },
+  "homepage": "https://github.com/merryt/acquire#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.3.1"
+  }
+}
