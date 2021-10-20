@@ -1,5 +1,6 @@
 import "./GameList.js";
 var socket = io();
+import { joinLobby } from "./SwitchRoom.js";
 var messages = document.getElementById("messages");
 var form = document.getElementById("form");
 var input = document.getElementById("input");
@@ -17,9 +18,13 @@ form.addEventListener("submit", function (e) {
   }
 });
 
-document.getElementById("createNewGame").addEventListener("click", (event) => {
-  socket.emit("createNewGame");
-});
+document
+  .querySelector("#createNewGame")
+  .addEventListener("click", () => socket.emit("createNewGame"));
+
+document
+  .querySelector("#leaveGame")
+  .addEventListener("click", () => joinLobby());
 
 socket.on("your new game", (roomID) => {
   console.log("moving you into the room you just created", roomID);
