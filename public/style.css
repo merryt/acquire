@@ -53,3 +53,13 @@ body {
 #messages > li:nth-child(odd) {
   background: #efefef;
 }
+
+game-list {
+  display: block;
+  background: #cacaca;
+}
+
+.list-of-games {
+  display: flex;
+  flex-direction: column;
+}

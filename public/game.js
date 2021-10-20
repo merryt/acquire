@@ -16,9 +16,21 @@ form.addEventListener("submit", function (e) {
     input.value = "";
   }
 });
+
+document.getElementById("createNewGame").addEventListener("click", (event) => {
+  socket.emit("createNewGame");
+});
+
+socket.on("your new game", (roomID) => {
+  console.log("moving you into the room you just created", roomID);
+  // move user into their own room
+});
+
 socket.on("chat message", function (msg) {
   var item = document.createElement("li");
   item.textContent = msg;
   messages.appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
 });
+
+socket.on("log", (msg) => console.log(msg));

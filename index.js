@@ -13,6 +13,8 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+let games = [{ id: 1, status: "open" }];
+
 // List of all outstanding games
 app.get("/", (req, res) => {
   // check to see if player is logged in (for now we might not want to mess with that)
@@ -38,7 +40,7 @@ io.on("connection", (socket) => {
   // this organisation pattern is taken from https://stackoverflow.com/questions/20466129/how-to-organize-socket-handling-in-node-js-and-socket-io-app
   var eventHandlers = {
     chat: new Chat(io, app, socket),
-    lobby: new LobbyUpdates(io, app, socket),
+    lobby: new LobbyUpdates(io, app, socket, games),
   };
 
   for (var category in eventHandlers) {
