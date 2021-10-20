@@ -8,12 +8,4 @@ To get dev setup
 - Install nodemon globally
 - `npm run dev`
 
-
-## Todo
-### Major Areas
-- Login/Auth
-- Chat/Lobby
-- Single Game
-
-### Dev Env
-- Install prettier
+For todos check out the [project board](https://github.com/merryt/acquire/projects/1) 
