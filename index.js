@@ -14,9 +14,27 @@ const __dirname = path.dirname(__filename);
 
 app.get("/", (req, res) => {
   // check to see if player is logged in (for now we might not want to mess with that)
-
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/client/index.html");
 });
+
+app.get("/login", (req, res) => {
+  // check to see if player is logged in (for now we might not want to mess with that)
+  res.sendFile(__dirname + "/client/login.html");
+});
+
+
+app.get("/game", (req, res) => {
+  // check to see if player is logged in (for now we might not want to mess with that)
+  res.sendFile(__dirname + "/client/game.html");
+});
+
+// exposes the static folder (second paramater) as /public (first paramater)
+app.use('/public', express.static('public'))
+
+
+
+
+
 
 io.on("connection", (socket) => {
   console.log("a user connected");
