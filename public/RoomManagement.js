@@ -1,9 +1,13 @@
-const joinGame = (gameId) => {
+var socket = io();
+
+const joinGameRoom = (gameId) => {
   console.log("joining game");
   const bodyClasslist = document.body.classList;
   bodyClasslist.add("game-view");
   bodyClasslist.remove("lobby-view");
   document.querySelector("#activeGame").dataset.gameId = gameId;
+
+  // add users to game object
 };
 
 const joinLobby = () => {
@@ -13,4 +17,9 @@ const joinLobby = () => {
   bodyClasslist.add("lobby-view");
 };
 
-export { joinLobby, joinGame };
+const joinGame = (gameId) => {
+  console.log("player is trying to join ", gameId);
+  socket.emit("playerJoiningGame", gameId);
+};
+
+export { joinLobby, joinGameRoom, joinGame };
