@@ -19,7 +19,7 @@ function getListOfGames(text) {
 
 function createNewGame(text) {
   const newGameId = Math.ceil(Math.random() * 1000);
-  this.games.unshift({ id: newGameId, status: "open" });
+  this.games.unshift({ id: newGameId, status: "open", players: [] });
   this.io.to(this.socket.id).emit("your new game", newGameId);
   broadcastAllGames(this.io, this.games);
 }
