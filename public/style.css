@@ -5,6 +5,14 @@ body {
     Arial, sans-serif;
 }
 
+.lobby-view .game {
+  display: none;
+}
+
+.game-view .lobby {
+  display: none;
+}
+
 #form {
   background: rgba(0, 0, 0, 0.15);
   padding: 0.25rem;
@@ -57,6 +65,10 @@ body {
 game-list {
   display: block;
   background: #cacaca;
+}
+
+game-list .join-game-button {
+  margin-left: 10px;
 }
 
 .list-of-games {

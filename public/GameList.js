@@ -1,4 +1,5 @@
 var socket = io();
+import { joinGameRoom } from "./RoomManagement.js";
 
 class GameList extends HTMLElement {
   connectedCallback() {
@@ -7,17 +8,31 @@ class GameList extends HTMLElement {
       this.setInnerHTML("Ongoing Games", gamesStr)
     );
   }
-
+  handleClick;
   setInnerHTML(title, games) {
+    this.innerHTML = "";
+    const $title = this.appendChild(document.createElement("h3"));
+    $title.textContent = title;
+
     let gameList = `<h3>${title}</h3>`;
     if (games.length > 0) {
-      gameList += `<div class="list-of-games">`;
+      const $gameList = this.appendChild(
+        document.createElement("div") // needs class of "list-of-games")
+      );
       for (const game of games) {
-        gameList += `<span><a href="#" data-id="${game.id}">Game #${game.id}</a> - ${game.status}</span>`;
+        const $game = $gameList.appendChild(document.createElement("div"));
+        $game.textContent = `#${game.id} - ${game.status}`;
+        const $button = $game.appendChild(document.createElement("button"));
+        $button.setAttribute("data-id", game.id);
+        $button.classList.add("join-game-button");
+        $button.textContent = `Join`;
+
+        $button.addEventListener("click", () => {
+          console.log("button clicked", game.id);
+          joinGameRoom(game.id);
+        });
       }
-      gameList += "</div>";
     }
-    this.innerHTML = gameList;
   }
 }
 

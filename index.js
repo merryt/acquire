@@ -6,6 +6,7 @@ import { Server } from "socket.io";
 const io = new Server(server);
 import { default as Chat } from "./EventHandlers/Chat.js";
 import { default as LobbyUpdates } from "./EventHandlers/LobbyUpdates.js";
+import { default as Game } from "./EventHandlers/Game.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -13,7 +14,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-let games = [{ id: 1, status: "open" }];
+let games = [{ id: 1, status: "open", players: [] }];
 
 // List of all outstanding games
 app.get("/", (req, res) => {
@@ -41,6 +42,7 @@ io.on("connection", (socket) => {
   var eventHandlers = {
     chat: new Chat(io, app, socket),
     lobby: new LobbyUpdates(io, app, socket, games),
+    Game: new Game(io, app, socket, games),
   };
 
   for (var category in eventHandlers) {

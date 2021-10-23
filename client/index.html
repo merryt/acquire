@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
+    <title>Acquire</title>
     <link rel="stylesheet" href="/public/style.css" />
   </head>
 
-  <body>
+  <body class="lobby-view">
+    <div class="game" id="activeGame">
+      <button id="leaveGame">Leave Game</button>
+      <button id="joinGame">Join Game</button>
+    </div>
     <div class="lobby">
       <game-list></game-list>
       <button id="createNewGame">New Game</button>
@@ -13,11 +17,13 @@
         <li>list of games</li>
       </ul>
       <ul id="messages"></ul>
+
+      <form id="form" action="">
+        <input id="input" autocomplete="off" /><button>Send</button>
+      </form>
     </div>
-    <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
-    </form>
+
     <script src="/socket.io/socket.io.js"></script>
-    <script type="module" src="public/game.js"></script>
+    <script type="module" src="public/client.js"></script>
   </body>
 </html>
