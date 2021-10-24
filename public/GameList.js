@@ -4,9 +4,7 @@ import { joinGameRoom } from "./RoomManagement.js";
 class GameList extends HTMLElement {
   connectedCallback() {
     this.setInnerHTML("No Active Games", []);
-    socket.on("list of games", (gamesStr) =>
-      this.setInnerHTML("Ongoing Games", gamesStr)
-    );
+    socket.on("list of games", games => this.setInnerHTML("Ongoing Games", games));
   }
   handleClick;
   setInnerHTML(title, games) {
