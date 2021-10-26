@@ -14,7 +14,9 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-let games = [{ id: 1, status: "open", players: [] }];
+let games = [
+  { id: 1, status: "open", players: [], gametype: "singles", maxplayers: "1" },
+];
 
 // List of all outstanding games
 app.get("/", (req, res) => {
