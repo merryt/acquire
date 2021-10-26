@@ -18,7 +18,10 @@ function playerJoiningGame(gameIdstr) {
   console.log("player is joining game: " + gameId);
   const playerID = this.socket.id;
   const activeGame = this.games.find((game) => game.id === gameId);
-  activeGame.players.push(playerID);
+  if (activeGame.players) {
+    activeGame.players.push(playerID);
+  } else {
+    activeGame.players = [playerID];
+  }
   console.log(this.games);
-  // this.io.emit("chat message", text);
 }
