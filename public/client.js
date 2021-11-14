@@ -18,9 +18,14 @@ form.addEventListener("submit", function (e) {
   }
 });
 
-document
-  .querySelector("#createNewGame")
-  .addEventListener("click", () => socket.emit("createNewGame"));
+document.querySelector("#createNewGame").addEventListener("click", () => {
+  const $gametype = document.querySelector("#game-type");
+  const $maxplayers = document.querySelector("#max-players");
+  socket.emit("createNewGame", {
+    gametype: $gametype.value,
+    maxplayers: $maxplayers.value,
+  });
+});
 
 document
   .querySelector("#leaveGame")
