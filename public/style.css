@@ -9,17 +9,25 @@ body {
   display: none;
 }
 
+.lobby {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+}
+
 .game-view .lobby {
   display: none;
 }
 
-#form {
+#chat {
   background: rgba(0, 0, 0, 0.15);
   padding: 0.25rem;
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
+  width: 33%;
   display: flex;
   height: 3rem;
   box-sizing: border-box;
@@ -38,7 +46,7 @@ body {
   outline: none;
 }
 
-#form > button {
+#chat > button {
   background: #333;
   border: none;
   padding: 0 1rem;

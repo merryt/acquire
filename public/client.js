@@ -2,7 +2,7 @@ import "./GameList.js";
 var socket = io();
 import { joinLobby, joinGame } from "./RoomManagement.js";
 var messages = document.getElementById("messages");
-var form = document.getElementById("form");
+var chat = document.getElementById("chat");
 var input = document.getElementById("input");
 
 // get list of games
@@ -10,7 +10,7 @@ var input = document.getElementById("input");
 socket.emit("getListOfGames");
 
 // chat tools
-form.addEventListener("submit", function (e) {
+chat.addEventListener("submit", function (e) {
   e.preventDefault();
   if (input.value) {
     socket.emit("chatMessage", input.value);
