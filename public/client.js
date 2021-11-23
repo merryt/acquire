@@ -8,6 +8,7 @@ var input = document.getElementById("input");
 // get list of games
 
 socket.emit("getListOfGames");
+socket.emit("playerStartsGame", 1);
 
 // chat tools
 form.addEventListener("submit", function (e) {

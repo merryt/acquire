@@ -7,6 +7,7 @@ export default function (io, app, socket, games) {
   // Expose handler methods for events
   this.handler = {
     playerJoiningGame: playerJoiningGame.bind(this), // use the bind function to access this.app
+    playerStartsGame: playerStartsGame.bind(this), // use the bind function to access this.app
   };
 }
 
@@ -24,4 +25,13 @@ function playerJoiningGame(gameIdstr) {
     activeGame.players = [playerID];
   }
   console.log(this.games);
+}
+
+function playerStartsGame(gameIdstr) {
+    const gameId = Number.parseInt(gameIdstr);
+    const activeGame = this.games.find((game) => game.id === gameId);
+    //create a bag,tray,board arrays
+    
+    console.log(activeGame);
+    console.log(this.games);
 }
