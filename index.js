@@ -15,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 let games = [
-  { id: 1, status: "open", players: [], gametype: "singles", maxplayers: "1" },
+  { id: 1, status: "open", players: [], tiles: [], gametype: "singles", maxplayers: "4" },
 ];
 
 // List of all outstanding games
@@ -53,7 +53,11 @@ io.on("connection", (socket) => {
       socket.on(event, handler[event]);
     }
   }
+    socket.on('tiles', function (data) {
+    console.log(data.message);
+    });
 });
+
 
 server.listen(3000, () => {
   console.log("listening on *:3000");
