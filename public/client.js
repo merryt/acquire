@@ -37,11 +37,6 @@ document
   .querySelector("#leaveGame")
   .addEventListener("click", () => joinLobby());
 
-document.querySelector(".joinGame").addEventListener("click", () => {
-  const gameId = document.querySelector("#activeGame").dataset.gameId;
-  joinGame(gameId);
-});
-
 socket.on("your new game", (roomID) => {
   console.log("moving you into the room you just created", roomID);
   // move user into their own room
