@@ -8,7 +8,6 @@ var input = document.getElementById("input");
 // get list of games
 
 socket.emit("getListOfGames");
-socket.emit("playerStartsGame", 1);
 
 // chat tools
 form.addEventListener("submit", function (e) {
@@ -28,17 +27,23 @@ document.querySelector("#createNewGame").addEventListener("click", () => {
   });
 });
 
-document
-  .querySelector("#leaveGame")
-  .addEventListener("click", () => joinLobby());
+document.querySelector("#leaveGame").addEventListener("click", () => {
+  const gameId = document.querySelector("#activeGame").dataset.gameId;
+  socket.emit("playerStartsGame", gameId);
+});
 
 document.querySelector("#joinGame").addEventListener("click", () => {
   const gameId = document.querySelector("#activeGame").dataset.gameId;
   joinGame(gameId);
 });
 
+document
+  .querySelector("#startGame")
+  .addEventListener("click", () => startGame());
+
 socket.on("your new game", (roomID) => {
   console.log("moving you into the room you just created", roomID);
+
   // move user into their own room
 });
 
