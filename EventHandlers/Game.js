@@ -28,18 +28,12 @@ function playerJoiningGame(gameIdstr) {
 }
 
 function rowLabel(row) {
-  if (row == 1) return "A";
-  if (row == 2) return "B";
-  if (row == 3) return "C";
-  if (row == 4) return "D";
-  if (row == 5) return "E";
-  if (row == 6) return "F";
-  if (row == 7) return "G";
-  if (row == 8) return "H";
-  if (row == 9) return "I";
+  return "ABCDEFGHI".charAt(row - 1);
 }
+
 function playerStartsGame(gameIdstr) {
   console.log("someone is starting this game");
+
   //Tiles is a 11 rows by 14 columns character array
   //Rows 0 and 10 are edges, Columns 0 and 13 are edges
   //Each tile is one of the following:
@@ -92,23 +86,23 @@ function playerStartsGame(gameIdstr) {
     }
   }
   //store the tiles in the games object
-  for (let i = 0; i <= 10; i++)
-    for (let j = 0; j <= 13; j++) activeGame.tiles.push(tiles[i][j]);
-
+  for (let i = 0; i <= 10; i++) {
+    for (let j = 0; j <= 13; j++) {
+      activeGame.tiles.push(tiles[i][j]);
+    }
+  }
   //send tiles to each player
   for (let playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++) {
-    this.io.on("connection", function (socket) {
-      // Use socket to communicate with this particular client only, sending it it's own id
-      var tray = "";
-      for (var i = 1; i <= 9; i++)
-        for (var j = 1; j <= 12; j++) {
-          //activeGame.tiles.push(tiles[i][j]);
-          if (tiles[i][j] == playerNumber.toString()) tray += j + rowLabel(i);
-        }
-      socket.emit("log", {
-        message: "Here are your tiles player" + playerNumber + " " + tray,
-        id: socket.id,
-      });
+    // Use socket to communicate with this particular client only, sending it it's own id
+    var tray = "";
+    for (var i = 1; i <= 9; i++)
+      for (var j = 1; j <= 12; j++) {
+        //activeGame.tiles.push(tiles[i][j]);
+        if (tiles[i][j] == playerNumber.toString()) tray += j + rowLabel(i);
+      }
+    this.socket.emit("log", {
+      message: "Here are your tiles player" + playerNumber + " " + tray,
+      id: this.socket.id,
     });
   }
   console.log(this.games);
