@@ -98,7 +98,7 @@ function playerStartsGame(gameIdstr) {
     for (var i = 1; i <= 9; i++)
       for (var j = 1; j <= 12; j++) {
         //activeGame.tiles.push(tiles[i][j]);
-        if (tiles[i][j] == playerNumber.toString()) tray += j + rowLabel(i);
+        if (tiles[i][j] == playerNumber.toString()) tray += rowLabel(i) + j;
       }
     this.socket.emit("log", {
       message: "Here are your tiles player" + playerNumber + " " + tray,
