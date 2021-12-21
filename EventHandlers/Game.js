@@ -68,7 +68,7 @@ function playerStartsGame(gameIdstr) {
     tiles[i][13] = "E";
   }
 
-  var numberOfPlayers = 4;
+  var numberOfPlayers = activeGame.players.length;
 
   //Draw tiles for players
   for (let playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++) {
