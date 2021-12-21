@@ -37,7 +37,7 @@ document
   .querySelector("#leaveGame")
   .addEventListener("click", () => joinLobby());
 
-document.querySelector("#joinGame").addEventListener("click", () => {
+document.querySelector(".joinGame").addEventListener("click", () => {
   const gameId = document.querySelector("#activeGame").dataset.gameId;
   joinGame(gameId);
 });
