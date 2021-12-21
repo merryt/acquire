@@ -1,5 +1,5 @@
 var socket = io();
-import { joinGameRoom } from "./RoomManagement.js";
+import { joinGameRoom, joinGame } from "./RoomManagement.js";
 
 class GameList extends HTMLElement {
   connectedCallback() {
@@ -29,8 +29,9 @@ class GameList extends HTMLElement {
         $button.classList.add = "joinGame";
 
         $button.addEventListener("click", () => {
-          console.log("button clicked", game.id);
+          console.log("joining game ---", game.id);
           joinGameRoom(game.id);
+          joinGame(game.id);
         });
       }
     }
