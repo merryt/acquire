@@ -92,15 +92,19 @@ function playerStartsGame(gameIdstr) {
     }
   }
   //send tiles to each player
-  for (let playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++) {
+  for (let playerNumber = 0; playerNumber < numberOfPlayers; playerNumber++) {
+    const playerSocketId = activeGame.players[playerNumber];
+
     // Use socket to communicate with this particular client only, sending it it's own id
     var tray = "";
     for (var i = 1; i <= 9; i++)
       for (var j = 1; j <= 12; j++) {
         //activeGame.tiles.push(tiles[i][j]);
-        if (tiles[i][j] == playerNumber.toString()) tray += rowLabel(i) + j;
+        if (tiles[i][j] == (playerNumber + 1).toString())
+          tray += j + rowLabel(i) + " ";
       }
-    this.socket.emit("log", {
+
+    this.io.to(playerSocketId).emit("log", {
       message: "Here are your tiles player" + playerNumber + " " + tray,
       id: this.socket.id,
     });

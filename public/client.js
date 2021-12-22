@@ -1,12 +1,11 @@
+import { socket } from "./socket.js";
 import "./GameList.js";
-var socket = io();
-import { joinLobby, joinGame } from "./RoomManagement.js";
+import { joinLobby } from "./RoomManagement.js";
 var messages = document.getElementById("messages");
 var form = document.getElementById("form");
 var input = document.getElementById("input");
 
 // get list of games
-
 socket.emit("getListOfGames");
 
 // chat tools

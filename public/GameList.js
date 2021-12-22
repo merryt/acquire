@@ -1,4 +1,4 @@
-var socket = io();
+import { socket } from "./socket.js";
 import { joinGameRoom, joinGame } from "./RoomManagement.js";
 
 class GameList extends HTMLElement {
