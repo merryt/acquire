@@ -45,7 +45,6 @@ function playerStartsGame(gameIdstr) {
 
   const gameId = Number.parseInt(gameIdstr);
   const activeGame = this.games.find((game) => game.id === gameId);
-  const playerID = this.socket.id;
   console.log("Number of players ... " + activeGame.players.length);
 
   var tiles = Array(11);
@@ -71,20 +70,20 @@ function playerStartsGame(gameIdstr) {
   var numberOfPlayers = activeGame.players.length;
 
   //Draw tiles for players
-  for (let playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++) {
-    {
-      var tilesForPlayer = 0;
-      while (tilesForPlayer < 7) {
-        var randomRow = Math.floor(Math.random() * 9) + 1;
-        var randomColumn = Math.floor(Math.random() * 12) + 1;
-        if (tiles[randomRow][randomColumn] == "B") {
-          if (tilesForPlayer == 0) tiles[randomRow][randomColumn] = "X";
-          else tiles[randomRow][randomColumn] = playerNumber + "";
-          tilesForPlayer++;
-        }
+
+  activeGame.players.forEach((playerSocketId) => {
+    var tilesForPlayer = 0;
+    while (tilesForPlayer < 7) {
+      var randomRow = Math.floor(Math.random() * 9) + 1;
+      var randomColumn = Math.floor(Math.random() * 12) + 1;
+      if (tiles[randomRow][randomColumn] == "B") {
+        if (tilesForPlayer == 0) tiles[randomRow][randomColumn] = "X";
+        else tiles[randomRow][randomColumn] = playerSocketId + "";
+        tilesForPlayer++;
       }
     }
-  }
+  });
+
   //store the tiles in the games object
   for (let i = 0; i <= 10; i++) {
     for (let j = 0; j <= 13; j++) {
@@ -97,12 +96,13 @@ function playerStartsGame(gameIdstr) {
 
     // Use socket to communicate with this particular client only, sending it it's own id
     var tray = "";
-    for (var i = 1; i <= 9; i++)
+    for (var i = 1; i <= 9; i++) {
       for (var j = 1; j <= 12; j++) {
         //activeGame.tiles.push(tiles[i][j]);
-        if (tiles[i][j] == (playerNumber + 1).toString())
+        if (tiles[i][j] == playerSocketId.toString())
           tray += j + rowLabel(i) + " ";
       }
+    }
 
     this.io.to(playerSocketId).emit("log", {
       message: "Here are your tiles player" + playerNumber + " " + tray,
