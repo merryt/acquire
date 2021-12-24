@@ -1,4 +1,4 @@
-var socket = io();
+import { socket } from "./socket.js";
 
 const joinGameRoom = (gameId) => {
   console.log("joining game");

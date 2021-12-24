@@ -1,10 +1,12 @@
-var socket = io();
-import { joinGameRoom } from "./RoomManagement.js";
+import { socket } from "./socket.js";
+import { joinGameRoom, joinGame } from "./RoomManagement.js";
 
 class GameList extends HTMLElement {
   connectedCallback() {
     this.setInnerHTML("No Active Games", []);
-    socket.on("list of games", games => this.setInnerHTML("Ongoing Games", games));
+    socket.on("list of games", (games) =>
+      this.setInnerHTML("Ongoing Games", games)
+    );
   }
   handleClick;
   setInnerHTML(title, games) {
@@ -24,10 +26,12 @@ class GameList extends HTMLElement {
         $button.setAttribute("data-id", game.id);
         $button.classList.add("join-game-button");
         $button.textContent = `Join`;
+        $button.classList.add = "joinGame";
 
         $button.addEventListener("click", () => {
-          console.log("button clicked", game.id);
+          console.log("joining game ---", game.id);
           joinGameRoom(game.id);
+          joinGame(game.id);
         });
       }
     }

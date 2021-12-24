@@ -14,5 +14,6 @@ export default function (io, app, socket) {
 function chatMessage(text) {
   // Broadcast message to all sockets
   console.log("message: " + text);
-  this.io.emit("chat message", text);
+    this.io.emit("chat message", text);
+   
 }

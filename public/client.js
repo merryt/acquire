@@ -1,12 +1,11 @@
+import { socket } from "./socket.js";
 import "./GameList.js";
-var socket = io();
-import { joinLobby, joinGame } from "./RoomManagement.js";
+import { joinLobby } from "./RoomManagement.js";
 var messages = document.getElementById("messages");
 var form = document.getElementById("form");
 var input = document.getElementById("input");
 
 // get list of games
-
 socket.emit("getListOfGames");
 
 // chat tools
@@ -27,14 +26,15 @@ document.querySelector("#createNewGame").addEventListener("click", () => {
   });
 });
 
+document.querySelector("#startGame").addEventListener("click", () => {
+  console.log("starting game");
+  const gameId = document.querySelector("#activeGame").dataset.gameId;
+  socket.emit("playerStartsGame", gameId);
+});
+
 document
   .querySelector("#leaveGame")
   .addEventListener("click", () => joinLobby());
-
-document.querySelector("#joinGame").addEventListener("click", () => {
-  const gameId = document.querySelector("#activeGame").dataset.gameId;
-  joinGame(gameId);
-});
 
 socket.on("your new game", (roomID) => {
   console.log("moving you into the room you just created", roomID);
